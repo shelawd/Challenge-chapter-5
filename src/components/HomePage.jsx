@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import aurora from "../assets/aurora.jpg";
+import Footer from "./Footer";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -99,6 +100,8 @@ function HomePage() {
           </p>
         )}
       </div>
+       {/* Footer */}
+       <Footer />
     </div>
   );
 }

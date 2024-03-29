@@ -8,6 +8,7 @@ import {
   faStop,
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
+import Footer from "./Footer";
 
 function DetailPage() {
   const location = useLocation();
@@ -43,13 +44,20 @@ function DetailPage() {
     setNext(location.state.nomor);
     detailSurat(location.state.nomor);
 
-    return () => {
+    const cleanup = () => {
       if (audioPlaying) {
         audioPlaying.pause();
         setAudioPlaying(null);
       }
     };
-  }, [location.state.nomor]);
+
+    window.addEventListener("beforeunload", cleanup);
+
+    return () => {
+      window.removeEventListener("beforeunload", cleanup);
+      cleanup(); 
+    };
+  }, [location.state.nomor, audioPlaying]);
 
   const goToSurat = (nomorSurat) => {
     setNext(nomorSurat);
@@ -206,9 +214,7 @@ function DetailPage() {
                   }}
                 >
                   <p className="mb-2">
-                    <strong>
-                      {detail.ayat[selectedAyat - 1].nomorAyat}
-                    </strong>
+                    <strong>{detail.ayat[selectedAyat - 1].nomorAyat}</strong>
                   </p>
                   <p className="text-right text-2xl mb-2 ">
                     {detail.ayat[selectedAyat - 1].teksArab}
@@ -217,17 +223,14 @@ function DetailPage() {
                     {detail.ayat[selectedAyat - 1].teksLatin}
                   </p>
                   <p className="mb-2">
-                    Artinya :
-                    {detail.ayat[selectedAyat - 1].teksIndonesia}
+                    Artinya :{detail.ayat[selectedAyat - 1].teksIndonesia}
                   </p>
                   <div className="flex flex-row">
                     <button
                       onClick={() =>
                         handleAudioPlay(
                           detail.ayat[selectedAyat - 1].audio[
-                            Object.keys(
-                              detail.ayat[selectedAyat - 1].audio
-                            )[0]
+                            Object.keys(detail.ayat[selectedAyat - 1].audio)[0]
                           ]
                         )
                       }
@@ -235,9 +238,11 @@ function DetailPage() {
                     >
                       <FontAwesomeIcon icon={faPlay} /> Play
                     </button>
-                    <button onClick={handleAudioStop} className="flex items-center gap-2 mr-2 text-sm bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600 hover:text-gray-100 transition duration-300">
+                    <button
+                      onClick={handleAudioStop}
+                      className="flex items-center gap-2 mr-2 text-sm bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600 hover:text-gray-100 transition duration-300"
+                    >
                       <FontAwesomeIcon icon={faStop} /> Stop
-                      
                     </button>
                   </div>
                 </div>
@@ -246,6 +251,8 @@ function DetailPage() {
           </div>
         </div>
       )}
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

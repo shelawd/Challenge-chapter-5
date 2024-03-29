@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
+import Footer from "./Footer";
 
 function Tafsir() {
   const location = useLocation();
@@ -74,6 +75,8 @@ function Tafsir() {
           )}
         </div>
       )}
+       {/* Footer */}
+       <Footer />
     </div>
   );
 }
