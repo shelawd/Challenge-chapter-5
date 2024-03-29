@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretRight, faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretRight,
+  faCaretLeft,
+  faStop,
+  faPlay,
+} from "@fortawesome/free-solid-svg-icons";
 
 function DetailPage() {
   const location = useLocation();
@@ -11,6 +16,7 @@ function DetailPage() {
   const [prevSurat, setPrevSurat] = useState(null);
   const [nextSurat, setNextSurat] = useState(null);
   const [selectedAyat, setSelectedAyat] = useState("");
+  const [audioPlaying, setAudioPlaying] = useState(null);
 
   const detailSurat = async (nomorSurat) => {
     try {
@@ -36,7 +42,14 @@ function DetailPage() {
   useEffect(() => {
     setNext(location.state.nomor);
     detailSurat(location.state.nomor);
-  }, []);
+
+    return () => {
+      if (audioPlaying) {
+        audioPlaying.pause();
+        setAudioPlaying(null);
+      }
+    };
+  }, [location.state.nomor]);
 
   const goToSurat = (nomorSurat) => {
     setNext(nomorSurat);
@@ -45,6 +58,23 @@ function DetailPage() {
 
   const handleAyatChange = (event) => {
     setSelectedAyat(event.target.value);
+  };
+
+  const handleAudioPlay = (src) => {
+    if (audioPlaying) {
+      audioPlaying.pause();
+      setAudioPlaying(null);
+    }
+    const audio = new Audio(src);
+    audio.play();
+    setAudioPlaying(audio);
+  };
+
+  const handleAudioStop = () => {
+    if (audioPlaying) {
+      audioPlaying.pause();
+      setAudioPlaying(null);
+    }
   };
 
   return (
@@ -140,13 +170,24 @@ function DetailPage() {
                       </p>
                       <p className="mb-2 italic mt-8 ">{ayat.teksLatin}</p>
                       <p className="mb-2">Artinya :{ayat.teksIndonesia}</p>
-                      <div className="customAudio">
-                        <audio controls>
-                          <source
-                            src={ayat.audio[Object.keys(ayat.audio)[0]]}
-                            type="audio/mpeg"
-                          />
-                        </audio>
+                      <div className="flex flex-row">
+                        <button
+                          onClick={() =>
+                            handleAudioPlay(
+                              ayat.audio[Object.keys(ayat.audio)[0]]
+                            )
+                          }
+                          className="flex items-center gap-2 mr-2 text-sm bg-blue-500 text-white rounded-full px-2 py-1 hover:bg-blue-600 hover:text-gray-100 transition duration-300"
+                        >
+                          <FontAwesomeIcon icon={faPlay} />
+                          Play
+                        </button>
+                        <button
+                          onClick={handleAudioStop}
+                          className="flex items-center gap-2 mr-2 text-sm bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600 hover:text-gray-100 transition duration-300"
+                        >
+                          <FontAwesomeIcon icon={faStop} /> Stop
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -165,7 +206,9 @@ function DetailPage() {
                   }}
                 >
                   <p className="mb-2">
-                    <strong>{detail.ayat[selectedAyat - 1].nomorAyat}</strong>
+                    <strong>
+                      {detail.ayat[selectedAyat - 1].nomorAyat}
+                    </strong>
                   </p>
                   <p className="text-right text-2xl mb-2 ">
                     {detail.ayat[selectedAyat - 1].teksArab}
@@ -174,19 +217,28 @@ function DetailPage() {
                     {detail.ayat[selectedAyat - 1].teksLatin}
                   </p>
                   <p className="mb-2">
-                    Artinya :{detail.ayat[selectedAyat - 1].teksIndonesia}
+                    Artinya :
+                    {detail.ayat[selectedAyat - 1].teksIndonesia}
                   </p>
-                  <div className="customAudio">
-                    <audio controls>
-                      <source
-                        src={
+                  <div className="flex flex-row">
+                    <button
+                      onClick={() =>
+                        handleAudioPlay(
                           detail.ayat[selectedAyat - 1].audio[
-                            Object.keys(detail.ayat[selectedAyat - 1].audio)[0]
+                            Object.keys(
+                              detail.ayat[selectedAyat - 1].audio
+                            )[0]
                           ]
-                        }
-                        type="audio/mpeg"
-                      />
-                    </audio>
+                        )
+                      }
+                      className="flex items-center gap-2 mr-2 text-sm bg-blue-500 text-white rounded-full px-2 py-1 hover:bg-blue-600 hover:text-gray-100 transition duration-300"
+                    >
+                      <FontAwesomeIcon icon={faPlay} /> Play
+                    </button>
+                    <button onClick={handleAudioStop} className="flex items-center gap-2 mr-2 text-sm bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600 hover:text-gray-100 transition duration-300">
+                      <FontAwesomeIcon icon={faStop} /> Stop
+                      
+                    </button>
                   </div>
                 </div>
               </div>

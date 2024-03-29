@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import aurora from "../assets/aurora.jpg";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ function HomePage() {
           className="bg-[#912BBC] p-2 rounded-md text-white inline-block bg-cover"
           style={{
             width: "fit-content",
-            backgroundImage: "url('/src/assets/aurora.jpg')",
+            backgroundImage: `url(${aurora})`,
           }}
         >
           <p className="text-5xl">{time}</p>

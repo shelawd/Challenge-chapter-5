@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import masjidImage from "../assets/masjid.jpg";
 
 const LandingPage = () => {
   return (
@@ -7,7 +8,7 @@ const LandingPage = () => {
       <h1 className="text-4xl font-bold mb-8 text-white">Quran App</h1>
       <div className="border border-gray-300 rounded-lg overflow-hidden">
         <img
-          src="/src/assets/masjid.jpg"
+          src={masjidImage}
           alt="Masjid"
           className="w-64 h-64 object-cover"
         />
