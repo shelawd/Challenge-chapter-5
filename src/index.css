@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #e5d4ff;
+}
+
+styles.css .customAudio audio::-webkit-media-controls-panel {
+  gap: 1px;
+}
