@@ -4,6 +4,8 @@ import HomePage from "./components/HomePage";
 import DetailPage from "./components/DetailPage";
 import Tafsir from "./components/Tafsir";
 import LandingPage from "./pages/LandingPage";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
 // import DeskripsiPage from "./components/Deskripsi";
 
 export default function App() {
@@ -11,6 +13,14 @@ export default function App() {
     {
       path: "/",
       element: <LandingPage />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
     },
     {
       path: "/home",

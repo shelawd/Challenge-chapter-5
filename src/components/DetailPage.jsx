@@ -18,6 +18,9 @@ function DetailPage() {
   const [nextSurat, setNextSurat] = useState(null);
   const [selectedAyat, setSelectedAyat] = useState("");
   const [audioPlaying, setAudioPlaying] = useState(null);
+  const [selectedSurat, setSelectedSurat] = useState(null);
+  const [selectedAyatAudio, setSelectedAyatAudio] = useState(null);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
   const detailSurat = async (nomorSurat) => {
     try {
@@ -41,47 +44,60 @@ function DetailPage() {
   };
 
   useEffect(() => {
-    setNext(location.state.nomor);
-    detailSurat(location.state.nomor);
+    const nomorSurat = location.state.nomor;
+    setNext(nomorSurat);
+    setSelectedSurat(nomorSurat);
+    setSelectedAyat(""); // Reset selectedAyat when component re-renders
+    detailSurat(nomorSurat);
 
-    const cleanup = () => {
+    return () => {
       if (audioPlaying) {
         audioPlaying.pause();
         setAudioPlaying(null);
+        setSelectedAyatAudio(null);
+        setIsAudioPlaying(false);
       }
-    };
-
-    window.addEventListener("beforeunload", cleanup);
-
-    return () => {
-      window.removeEventListener("beforeunload", cleanup);
-      cleanup(); 
     };
   }, [location.state.nomor, audioPlaying]);
 
-  const goToSurat = (nomorSurat) => {
+  const goToSurat = async (nomorSurat) => {
+    setSelectedSurat(nomorSurat);
     setNext(nomorSurat);
     detailSurat(nomorSurat);
+
+    if (audioPlaying) {
+      audioPlaying.pause();
+      setAudioPlaying(null);
+      setSelectedAyatAudio(null);
+      setIsAudioPlaying(false);
+    }
   };
 
   const handleAyatChange = (event) => {
     setSelectedAyat(event.target.value);
   };
 
-  const handleAudioPlay = (src) => {
+  const handleAudioPlay = (src, nomorSurat, nomorAyat) => {
     if (audioPlaying) {
       audioPlaying.pause();
       setAudioPlaying(null);
+      setIsAudioPlaying(false);
     }
     const audio = new Audio(src);
     audio.play();
     setAudioPlaying(audio);
+    setIsAudioPlaying(true);
+
+    setSelectedSurat(nomorSurat);
+    setSelectedAyatAudio(nomorAyat);
   };
 
   const handleAudioStop = () => {
     if (audioPlaying) {
       audioPlaying.pause();
       setAudioPlaying(null);
+      setSelectedAyatAudio(null);
+      setIsAudioPlaying(false);
     }
   };
 
@@ -182,7 +198,9 @@ function DetailPage() {
                         <button
                           onClick={() =>
                             handleAudioPlay(
-                              ayat.audio[Object.keys(ayat.audio)[0]]
+                              ayat.audio[Object.keys(ayat.audio)[0]],
+                              selectedSurat,
+                              ayat.nomorAyat
                             )
                           }
                           className="flex items-center gap-2 mr-2 text-sm bg-blue-500 text-white rounded-full px-2 py-1 hover:bg-blue-600 hover:text-gray-100 transition duration-300"
@@ -231,7 +249,9 @@ function DetailPage() {
                         handleAudioPlay(
                           detail.ayat[selectedAyat - 1].audio[
                             Object.keys(detail.ayat[selectedAyat - 1].audio)[0]
-                          ]
+                          ],
+                          selectedSurat,
+                          detail.ayat[selectedAyat - 1].nomorAyat
                         )
                       }
                       className="flex items-center gap-2 mr-2 text-sm bg-blue-500 text-white rounded-full px-2 py-1 hover:bg-blue-600 hover:text-gray-100 transition duration-300"

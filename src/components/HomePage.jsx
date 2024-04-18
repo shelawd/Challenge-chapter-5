@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import aurora from "../assets/aurora.jpg";
 import Footer from "./Footer";
+import Header from "./Header";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -25,6 +26,22 @@ function HomePage() {
     }
   };
 
+  // const fetchUserData = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       "https://shy-cloud-3319.fly.dev/api/v1/auth/me",
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       }
+  //     );
+  //     setUserName(response.data.data.name);
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
+
   useEffect(() => {
     listSurat();
 
@@ -46,6 +63,7 @@ function HomePage() {
 
   return (
     <div>
+      <Header />
       <div className="text-center mt-9">
         <div
           className="bg-[#912BBC] p-2 rounded-md text-white inline-block bg-cover"
