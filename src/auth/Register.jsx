@@ -15,6 +15,11 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    if (password.length < 8) {
+      setError("*Password minimal 8 karakter");
+      return;
+    }
+
     try {
       const response = await axios.post(
         "https://shy-cloud-3319.fly.dev/api/v1/auth/register",

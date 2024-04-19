@@ -50,10 +50,10 @@ function Header() {
       <div className="flex items-center">
         <Link to="/">
           <img
-            src="https://cdn2.iconfinder.com/data/icons/xomo-basics/128/document-06-512.png"
+            src="https://cdn1.iconfinder.com/data/icons/filet-ramadhan-kareem/512/alquran-512.png"
             width="50"
             alt="LOGO"
-            className="mr-2"
+            className="ms-3"
           />
         </Link>
       </div>

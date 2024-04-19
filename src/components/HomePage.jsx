@@ -42,7 +42,14 @@ function HomePage() {
   //   }
   // };
 
+  
   useEffect(() => {
+    const isLoggedIn = localStorage.getItem("token");
+    if (!isLoggedIn) {
+      // If user is not logged in, redirect to login page
+      
+      navigate("/login");
+    } else {
     listSurat();
 
     const intervalID = setInterval(() => {
@@ -50,6 +57,7 @@ function HomePage() {
     }, 1000);
 
     return () => clearInterval(intervalID);
+  }
   }, []);
 
   useEffect(() => {
