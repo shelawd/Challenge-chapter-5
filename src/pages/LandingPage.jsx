@@ -20,7 +20,7 @@ const LandingPage = () => {
     <>
       <Header />
       <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-[#401F71] to-black">
-        <h1 className="text-4xl font-bold mb-8 text-white">Quran App</h1>
+        <h1 className="text-4xl font-bold mb-5 text-white">Quran App</h1>
         <div className="border border-gray-300 rounded-lg overflow-hidden">
           <img
             src={masjidImage}

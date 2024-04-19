@@ -45,7 +45,7 @@ function Header() {
   };
 
   return (
-    <div className="bg-blue-500 p-2 flex justify-between items-center">
+<div className="bg-[#401F71] pr-5 ps-5 pt-2 flex justify-between items-center">
       {/* left side */}
       <div className="flex items-center">
         <Link to="/">
@@ -71,12 +71,12 @@ function Header() {
           </div>
         ) : (
           <>
-            <button onClick={handleLogin} className="inline-block p-2 text-blue-200 hover:text-blue-100 mr-2">
+            <button onClick={handleLogin} className="inline-block p-2 bg-yellow-500 hover:bg-yellow-300 rounded  hover:text-yellow-900 mr-2 font-semibold">
               Login
             </button>
             <button
               onClick={handleRegister}
-              className="inline-block py-2 px-4 text-yellow-700 bg-yellow-500 hover:bg-yellow-300 hover:text-yellow-900 rounded transition ease-in duration-150"
+              className="inline-block py-2 px-4    bg-yellow-500 hover:bg-yellow-300 hover:text-yellow-900 rounded transition ease-in duration-150 font-semibold"
             >
               Sign up
             </button>

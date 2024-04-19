@@ -40,6 +40,17 @@ function Login() {
         setShowPassword(!showPassword);
       };
 
+      const googleButtonStyle = {
+        backgroundColor: "#DB4437", // Warna latar belakang
+        color: "white", // Warna teks
+        border: "none", // Tidak ada border
+        borderRadius: "4px", // Sudut sudut sedikit membulat
+        padding: "10px 20px", // Ruang antara teks dan tepi tombol
+        fontSize: "16px", // Ukuran teks
+        cursor: "pointer", // Pointer saat mengarahkan ke tombol
+        marginBottom: "10px" // Jarak antara tombol dan tombol sebelumnya
+    };
+
     return (
         <div className="flex justify-center items-center h-screen box-border">
     <form onSubmit={handleLogin} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -96,7 +107,7 @@ function Login() {
             >Login</button>
         </div> 
 
-        <div className="border-b text-center mt-4">
+        <div className="border-b text-center ">
                 <div
                     className="leading-none px-2 inline-block text-sm text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
                     Or continue with
@@ -111,7 +122,8 @@ function Login() {
             }}
         />
          */}
-         <AuthGoogle buttonText="Google Login" />
+         <AuthGoogle buttonText="Login with Google" />
+         
         
         <p className="text-center text-sm text-gray-500">Don&#x27;t have an account?
             <a href="#!"
