@@ -24,7 +24,7 @@ function Login() {
             });
 
             console.log("Login success:", response.data); 
-            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("token", response.data.data.token);
             navigate("/home")
         } catch (error) {
             console.error("Login error:", error); 
