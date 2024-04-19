@@ -40,16 +40,7 @@ function Login() {
         setShowPassword(!showPassword);
       };
 
-      const googleButtonStyle = {
-        backgroundColor: "#DB4437", // Warna latar belakang
-        color: "white", // Warna teks
-        border: "none", // Tidak ada border
-        borderRadius: "4px", // Sudut sudut sedikit membulat
-        padding: "10px 20px", // Ruang antara teks dan tepi tombol
-        fontSize: "16px", // Ukuran teks
-        cursor: "pointer", // Pointer saat mengarahkan ke tombol
-        marginBottom: "10px" // Jarak antara tombol dan tombol sebelumnya
-    };
+      
 
     return (
         <div className="flex justify-center items-center h-screen box-border">
