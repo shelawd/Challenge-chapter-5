@@ -41,29 +41,17 @@ function Header() {
     navigate("/");
   };
 
-  const handleHomeClick = () => {
-    if (!userName) {
-      alert("Please login first!");
-      return;
-    }
-    navigate("/");
-  };
-
   return (
-    <div className="bg-blue-500 p-4 flex justify-between items-center">
+    <div className="bg-blue-500 p-2 flex justify-between items-center">
       {/* left side */}
       <div className="flex items-center">
-        <img
-          src="https://cdn2.iconfinder.com/data/icons/xomo-basics/128/document-06-512.png"
-          width="50"
-          alt="LOGO"
-          className="mr-2"
-        />
-        <button onClick={handleHomeClick} className="inline-block p-2 text-blue-200 mr-2 hover:text-blue-100">
-          Home
-        </button>
-        <Link to="/about" className="inline-block p-2 text-blue-200 hover:text-blue-100">
-          About
+        <Link to="/">
+          <img
+            src="https://cdn2.iconfinder.com/data/icons/xomo-basics/128/document-06-512.png"
+            width="50"
+            alt="LOGO"
+            className="mr-2"
+          />
         </Link>
       </div>
       {/* right side */}
