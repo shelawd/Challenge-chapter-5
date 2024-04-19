@@ -3,13 +3,15 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthGoogle from "./LoginGoogle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 // import { GoogleLogin } from '@react-oauth/google';
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -22,7 +24,7 @@ function Login() {
             });
 
             console.log("Login success:", response.data); 
-            localStorage.setItem("Token ", response.data.token);
+            localStorage.setItem("token", response.data.token);
             navigate("/home")
         } catch (error) {
             console.error("Login error:", error); 
@@ -33,6 +35,10 @@ function Login() {
     const handleRegister = () => {
         navigate("/register");
     }
+
+    const togglePassword = () => {
+        setShowPassword(!showPassword);
+      };
 
     return (
         <div className="flex justify-center items-center h-screen box-border">
@@ -60,7 +66,7 @@ function Login() {
         <div className="bg-white p-4 rounded-lg">
             <div className="relative bg-inherit">
                 <input 
-                type="password" 
+                type={showPassword ? "text" : "password"} 
                 id="password" 
                 name="password" 
                 placeholder="Password"
@@ -73,6 +79,11 @@ function Login() {
                 htmlFor="password"
                 className="absolute cursor-text left-0 -top-3 text-sm text-gray-500 bg-inherit mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-sky-600 peer-focus:text-sm transition-all"
                 >Password</label>
+                <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              className="absolute cursor-pointer right-4 top-3 text-gray-400"
+              onClick={togglePassword}
+            />
             </div>
             
         </div>

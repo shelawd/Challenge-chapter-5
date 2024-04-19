@@ -9,7 +9,7 @@ const LandingPage = () => {
 
   const handleGetStartedClick = () => {
     if (!localStorage.getItem("token")) {
-      alert("Please login first!");
+      alert("Harus login dulu yaa");
       navigate("/login");
     } else {
       navigate("/home");

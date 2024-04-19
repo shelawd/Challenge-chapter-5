@@ -1,12 +1,13 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HomePage from "./components/HomePage";
 import DetailPage from "./components/DetailPage";
 import Tafsir from "./components/Tafsir";
 import LandingPage from "./pages/LandingPage";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
-// import DeskripsiPage from "./components/Deskripsi";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -34,12 +35,11 @@ export default function App() {
       path: "/tafsir-surat",
       element: <Tafsir />,
     },
-    // {
-    //   path: "/deskripsi-surat",
-    //   element: <DeskripsiPage />
-    // },
   ]);
-  console.log("test");
 
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider router={router}>
+      <ToastContainer />
+    </RouterProvider>
+  );
 }

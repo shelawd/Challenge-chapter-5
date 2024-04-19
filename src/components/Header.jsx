@@ -36,9 +36,12 @@ function Header() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setUserName("");
-    navigate("/");
+    const isConfirmed = window.confirm("Apakah kamu yakin logout?");
+    if (isConfirmed) {
+      localStorage.removeItem("token");
+      setUserName("");
+      navigate("/");
+    }
   };
 
   return (

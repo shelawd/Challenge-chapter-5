@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 function Register() {
   const navigate = useNavigate();
@@ -8,6 +10,7 @@ function Register() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -25,8 +28,8 @@ function Register() {
       console.log("response ", response.status);
       if (response.status === 201) {
         alert("Registration success!");
-        localStorage.setItem("user", JSON.stringify(response.data.user));
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/login"); 
       }
     } catch (error) {
@@ -39,6 +42,9 @@ function Register() {
     }
   };
 
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   return (
     <div className="flex justify-center items-center h-screen">
       <form
@@ -94,7 +100,7 @@ function Register() {
           <div className="relative bg-inherit">
           
           <input
-            type="password"
+            type={showPassword ? "text" : "password"} 
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -108,6 +114,11 @@ function Register() {
           >
             Password
           </label>
+          <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              className="absolute cursor-pointer right-4 top-3 text-gray-400"
+              onClick={togglePassword}
+            />
           </div>
           
         </div>
