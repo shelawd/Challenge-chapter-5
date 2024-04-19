@@ -26,28 +26,11 @@ function HomePage() {
     }
   };
 
-  // const fetchUserData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       "https://shy-cloud-3319.fly.dev/api/v1/auth/me",
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //       }
-  //     );
-  //     setUserName(response.data.data.name);
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
 
   
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("token");
     if (!isLoggedIn) {
-      // If user is not logged in, redirect to login page
-      
       navigate("/login");
     } else {
     listSurat();

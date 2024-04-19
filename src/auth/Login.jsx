@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import AuthGoogle from "./LoginGoogle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-// import { GoogleLogin } from '@react-oauth/google';
 
 function Login() {
     const [email, setEmail] = useState("");
@@ -38,9 +37,9 @@ function Login() {
 
     const togglePassword = () => {
         setShowPassword(!showPassword);
-      };
+    };
 
-      
+
 
     return (
         <div className="flex justify-center items-center h-screen box-border">
@@ -104,18 +103,8 @@ function Login() {
                     Or continue with
                 </div>
             </div>
-        {/* <GoogleLogin
-            onSuccess={credentialResponse => {
-                console.log(credentialResponse);
-                }}
-                onError={() => {
-                console.log('Login Failed');
-            }}
-        />
-         */}
-         <AuthGoogle buttonText="Login with Google" />
-         
-        
+        <AuthGoogle buttonText="Login with Google" />
+
         <p className="text-center text-sm text-gray-500">Don&#x27;t have an account?
             <a href="#!"
             onClick={handleRegister}

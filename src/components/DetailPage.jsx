@@ -44,21 +44,23 @@ function DetailPage() {
   };
 
   useEffect(() => {
-    const nomorSurat = location.state.nomor;
-    setNext(nomorSurat);
-    setSelectedSurat(nomorSurat);
-    setSelectedAyat(""); // Reset selectedAyat when component re-renders
-    detailSurat(nomorSurat);
-
-    return () => {
-      if (audioPlaying) {
-        audioPlaying.pause();
-        setAudioPlaying(null);
-        setSelectedAyatAudio(null);
-        setIsAudioPlaying(false);
-      }
-    };
-  }, [location.state.nomor, audioPlaying]);
+    if (location.state && location.state.nomor) {
+      const nomorSurat = location.state.nomor;
+      setNext(nomorSurat);
+      setSelectedSurat(nomorSurat);
+      setSelectedAyat(""); // Reset selectedAyat when component re-renders
+      detailSurat(nomorSurat);
+  
+      return () => {
+        if (audioPlaying) {
+          audioPlaying.pause();
+          setAudioPlaying(null);
+          setSelectedAyatAudio(null);
+          setIsAudioPlaying(false);
+        }
+      };
+    }
+  }, [location.state, audioPlaying]);
 
   const goToSurat = async (nomorSurat) => {
     setSelectedSurat(nomorSurat);

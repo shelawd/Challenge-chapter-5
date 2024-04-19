@@ -46,7 +46,7 @@ function Header() {
 
   return (
 <div className="bg-[#401F71] pr-5 ps-5 pt-2 flex justify-between items-center">
-      {/* left side */}
+      {/* kiri */}
       <div className="flex items-center">
         <Link to="/">
           <img
@@ -57,7 +57,7 @@ function Header() {
           />
         </Link>
       </div>
-      {/* right side */}
+      {/* kanan */}
       <div className="hidden md:block">
         {userName ? (
           <div className="flex items-center">

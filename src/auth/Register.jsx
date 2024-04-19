@@ -50,6 +50,7 @@ function Register() {
   const togglePassword = () => {
     setShowPassword(!showPassword);
   };
+  
   return (
     <div className="flex justify-center items-center h-screen">
       <form
@@ -58,9 +59,10 @@ function Register() {
       >
         <img className="mx-auto h-12 w-auto" src="https://www.svgrepo.com/show/499664/user-happy.svg" alt="" />
 
-<h2 className="my-3 text-center text-3xl font-bold tracking-tight text-gray-900">
-    Sign up for an account
-</h2>
+        <h2 className="my-3 text-center text-3xl font-bold tracking-tight text-gray-900">
+          Sign up for an account
+        </h2>
+
         <div className="bg-white p-4 rounded-lg">
           <div className="relative bg-inherit">
           <input
